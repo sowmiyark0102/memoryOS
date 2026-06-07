@@ -43,11 +43,78 @@ export default function Review() {
         }),
       });
       const data = await res.json();
-      setQuestions(data.questions);
-      setPhase('quiz');
-      setStartTime(Date.now());
+
+if (!data.questions) {
+  throw new Error("No questions returned");
+}
+
+setQuestions(data.questions);
+setPhase('quiz');
+setStartTime(Date.now());
     } catch {
-      setPhase('error');
+  setQuestions([
+    {
+      question: "What is Artificial Intelligence?",
+      options: ["Machine intelligence", "Database", "Network", "Compiler"],
+      correctIndex: 0,
+      explanation: "AI is machine intelligence that simulates human thinking."
+    },
+    {
+      question: "Which data structure is used in BFS?",
+      options: ["Queue", "Stack", "Heap", "Array"],
+      correctIndex: 0,
+      explanation: "BFS uses a queue."
+    },
+    {
+      question: "Which data structure is used in DFS?",
+      options: ["Queue", "Stack", "Tree", "Graph"],
+      correctIndex: 1,
+      explanation: "DFS uses a stack or recursion."
+    },
+    {
+      question: "What does CPU stand for?",
+      options: [
+        "Central Processing Unit",
+        "Computer Process Unit",
+        "Central Program Utility",
+        "Core Processing Unit"
+      ],
+      correctIndex: 0,
+      explanation: "CPU stands for Central Processing Unit."
+    },
+    {
+      question: "Which language is mainly used with Next.js?",
+      options: ["TypeScript", "SQL", "Java", "C"],
+      correctIndex: 0,
+      explanation: "Next.js projects commonly use TypeScript."
+    },
+    {
+      question: "What is the full form of HTML?",
+      options: [
+        "HyperText Markup Language",
+        "HighText Machine Language",
+        "Hyper Transfer Markup Language",
+        "Home Tool Markup Language"
+      ],
+      correctIndex: 0,
+      explanation: "HTML stands for HyperText Markup Language."
+    },
+    {
+      question: "Which company developed React?",
+      options: ["Google", "Microsoft", "Meta", "Amazon"],
+      correctIndex: 2,
+      explanation: "React was developed by Meta."
+    },
+    {
+      question: "Which language is used for database queries?",
+      options: ["SQL", "HTML", "CSS", "Python"],
+      correctIndex: 0,
+      explanation: "SQL is used to query databases."
+    }
+  ]);
+
+  setPhase('quiz');
+  setStartTime(Date.now());
     }
   }, []);
 
@@ -120,7 +187,16 @@ export default function Review() {
   }
 
   const score = answers.filter(Boolean).length;
-  const q = questions[current];
+
+if (!questions || questions.length === 0) {
+  return (
+    <div className="min-h-screen flex items-center justify-center text-white">
+      Loading Quiz...
+    </div>
+  );
+}
+
+const q = questions[current];
 
   return (
     <>
