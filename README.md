@@ -26,17 +26,3 @@ Humans forget **70% of what they learn within 24 hours** (Ebbinghaus Forgetting 
 | 💡 **AI Memory Summaries** | Claude generates compact, memory-optimized notes |
 
 ---
-
-## 🏗️ Tech Stack
-
-```
-Frontend:  Next.js 14 + TypeScript + Tailwind CSS
-AI:        Anthropic Claude (claude-sonnet-4-20250514)
-Viz:       Recharts + Custom D3 Force Graph
-State:     localStorage (no backend required for demo)
-Fonts:     Syne + DM Sans + JetBrains Mono
-Deploy:    Vercel (one-click)
-```
-
----
-
